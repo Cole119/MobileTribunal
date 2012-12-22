@@ -10,12 +10,12 @@ namespace MobileTribunal
     class MobileTribunal
     {
         public MainPage mainPage;
-        public WebClient webClient;
+        public HttpPoster poster;
 
         public MobileTribunal(MainPage page)
         {
             this.mainPage = page;
-            webClient = new WebClient();
+            poster = new HttpPoster();
         }
     }
 }
