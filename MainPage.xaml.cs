@@ -32,11 +32,7 @@ namespace MobileTribunal
         private void LoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             loginHandler.login(UsernameField.Text, PasswordField.Password);
-            /*bool successful = loginHandler.login(UsernameField.Text, PasswordField.Password);
-            if (!successful)
-            {
-                LoginFailedText.Visibility = System.Windows.Visibility.Visible;
-            }*/
+            
         }
 
         public void loginFailed()
