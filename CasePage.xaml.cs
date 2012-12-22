@@ -10,9 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace MobileTribunal
 {
-    public partial class PivotPage1 : PhoneApplicationPage
+    public partial class CasePage : PhoneApplicationPage
     {
-        public PivotPage1()
+        public CasePage()
         {
             InitializeComponent();
         }
