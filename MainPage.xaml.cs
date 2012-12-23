@@ -31,16 +31,20 @@ namespace MobileTribunal
 
         private void LoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            LoginProgressBar.Visibility = System.Windows.Visibility.Visible;
             loginHandler.login(UsernameField.Text, PasswordField.Password);
         }
 
         public void loginSucceeded()
         {
+            LoginProgressBar.Visibility = System.Windows.Visibility.Collapsed;
+            LoginFailedText.Visibility = System.Windows.Visibility.Collapsed;
             NavigationService.Navigate(new Uri("/CasePage.xaml", UriKind.Relative));
         }
 
         public void loginFailed()
         {
+            LoginProgressBar.Visibility = System.Windows.Visibility.Collapsed;
             LoginFailedText.Visibility = System.Windows.Visibility.Visible;
         }
 
@@ -51,7 +55,7 @@ namespace MobileTribunal
 
         private void UsernameField_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (UsernameField.Text.Length > 0)
+            if (UsernameField.Text.Length < 1)
             {
                 UsernameWatermark.Visibility = System.Windows.Visibility.Visible;
             }
@@ -64,7 +68,7 @@ namespace MobileTribunal
 
         private void PasswordField_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (PasswordField.Password.Length > 0)
+            if (PasswordField.Password.Length < 1)
             {
                 PasswordWatermark.Visibility = System.Windows.Visibility.Visible;
             }

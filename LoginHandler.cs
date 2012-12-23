@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace MobileTribunal
@@ -43,11 +44,17 @@ namespace MobileTribunal
 
             if ((int)rcode == 302)
             {
-                mobileTribunal.mainPage.loginSucceeded();
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    mobileTribunal.mainPage.loginSucceeded();
+                });
             }
             else
             {
-                mobileTribunal.mainPage.loginFailed();
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    mobileTribunal.mainPage.loginFailed();
+                });
             }
             // Close the stream object
             streamResponse.Close();
