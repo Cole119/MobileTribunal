@@ -47,10 +47,12 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox x:Name="UsernameField" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="456" Margin="0,61,0,0"/>
-            <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="0,131,0,0" VerticalAlignment="Top" Width="456"/>
+            <TextBox x:Name="UsernameField" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Margin="0,61,0,0" FontSize="24" GotFocus="UsernameField_GotFocus" LostFocus="UsernameField_LostFocus"/>
+            <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="0,131,0,0" VerticalAlignment="Top" Width="456" GotFocus="PasswordField_GotFocus" LostFocus="PasswordField_LostFocus"/>
             <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="166,204,0,0" VerticalAlignment="Top" Tap="LoginButton_Tap"/>
             <TextBlock x:Name="LoginFailedText" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Couldn't login. Is your username and password correct?" VerticalAlignment="Top" Width="413" Foreground="Red" Visibility="Collapsed"/>
+            <TextBlock x:Name="UsernameWatermark" HorizontalAlignment="Left" Margin="20,81,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="#FF767676" FontSize="24"/>
+            <TextBlock x:Name="PasswordWatermark" HorizontalAlignment="Left" Margin="20,151,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" FontSize="24" Foreground="#FF767676"/>
 
         </Grid>
 

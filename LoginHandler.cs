@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace MobileTribunal
 {
@@ -42,7 +43,7 @@ namespace MobileTribunal
 
             if ((int)rcode == 302)
             {
-
+                mobileTribunal.mainPage.loginSucceeded();
             }
             else
             {

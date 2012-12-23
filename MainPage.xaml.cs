@@ -32,12 +32,42 @@ namespace MobileTribunal
         private void LoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             loginHandler.login(UsernameField.Text, PasswordField.Password);
-            
+        }
+
+        public void loginSucceeded()
+        {
+            NavigationService.Navigate(new Uri("/CasePage.xaml", UriKind.Relative));
         }
 
         public void loginFailed()
         {
             LoginFailedText.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void UsernameField_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsernameWatermark.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void UsernameField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (UsernameField.Text.Length > 0)
+            {
+                UsernameWatermark.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
+        private void PasswordField_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordWatermark.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void PasswordField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordField.Password.Length > 0)
+            {
+                PasswordWatermark.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         // Sample code for building a localized ApplicationBar

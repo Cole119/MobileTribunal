@@ -1,29 +1,50 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="MobileTribunal.CasePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    x:Class="MobileTribunal.CasePage"
     mc:Ignorable="d"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <System:Double x:Key="ChampImageSize">60</System:Double>
+    </phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </phone:PhoneApplicationPage.FontFamily>
+    <phone:PhoneApplicationPage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </phone:PhoneApplicationPage.FontSize>
+    <phone:PhoneApplicationPage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </phone:PhoneApplicationPage.Foreground>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="Current Case">
+        <phone:Pivot x:Name="CurrentCasePivot" Title="Current Case">
             <!--Pivot item one-->
-            <phone:PivotItem Header="Game 1">
-                <ScrollViewer Grid.Row="1" HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
-                    <Grid>
-                        <Image x:Name="ChampImage" HorizontalAlignment="Right" Margin="346,10,0,0" VerticalAlignment="Top"/>
-                    </Grid>
-                </ScrollViewer>
+            <phone:PivotItem x:Name="CasePivotItem" Header="Game 1" FontSize="20" Margin="12,12,12,0">
+                <Grid HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Players" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,47,0,0">
+                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
+                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
+                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
+                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
+                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
+                    <TextBlock x:Name="ReportCommentsBlock" Margin="0,180,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="95" Width="436"/>
+                    <ScrollViewer x:Name="ChatScrollViewer" HorizontalAlignment="Left" Height="309" Margin="10,284,0,0" VerticalAlignment="Top" Width="436">
+                        <TextBlock x:Name="ChatBlock" TextWrapping="Wrap" Text="TextBlock"/>
+                    </ScrollViewer>
+                </Grid>
             </phone:PivotItem>
 
             <!--Pivot item two-->
@@ -32,5 +53,5 @@
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>
