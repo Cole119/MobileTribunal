@@ -8,14 +8,15 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MobileTribunal.Resources;
+using System.IO.IsolatedStorage;
 
 namespace MobileTribunal
 {
     public partial class MainPage : PhoneApplicationPage
     {
         private MobileTribunal mobileTribunal;
-
         private LoginHandler loginHandler;
+        private IsolatedStorageSettings appSettings;
 
         // Constructor
         public MainPage()
@@ -27,11 +28,37 @@ namespace MobileTribunal
 
             mobileTribunal = new MobileTribunal(this);
             loginHandler = new LoginHandler(mobileTribunal);
+            appSettings = IsolatedStorageSettings.ApplicationSettings;
+            if (appSettings.Contains("Username"))
+            {
+                UsernameWatermark.Visibility = System.Windows.Visibility.Collapsed;
+                UsernameField.Text = appSettings["Username"].ToString();
+            }
+            if (appSettings.Contains("Remember"))
+            {
+                RememberCheckBox.IsChecked = true;
+            }
         }
 
         private void LoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             LoginProgressBar.Visibility = System.Windows.Visibility.Visible;
+            if (RememberCheckBox.IsChecked.HasValue && RememberCheckBox.IsChecked.Value)
+            {
+                if (!(appSettings.Contains("Username")))
+                {
+                    appSettings.Add("Username", "");
+                }
+                appSettings["Username"] = UsernameField.Text;
+            }
+
+            if (!(appSettings.Contains("Remember")))
+            {
+                appSettings.Add("Remember", true);
+            }
+            appSettings["Remember"] = (RememberCheckBox.IsChecked.HasValue && RememberCheckBox.IsChecked.Value);
+            appSettings.Save();
+
             loginHandler.login(UsernameField.Text, PasswordField.Password);
         }
 

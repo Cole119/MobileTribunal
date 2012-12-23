@@ -39,13 +39,18 @@
                 <DataTemplate>
                     <Grid HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
                         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Players" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,47,0,0">
-                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage1}"/>
-                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage2}"/>
-                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage3}"/>
-                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage4}"/>
-                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage5}"/>
-                        </StackPanel>
+                        <ListBox ItemsSource="{Binding champImages}" Margin="0,47,0,0" IsHitTestVisible="False">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                         <TextBlock HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
                         <TextBlock x:Name="ReportCommentsBlock" Margin="0,180,0,0" TextWrapping="Wrap" Text="{Binding comments}" VerticalAlignment="Top" Height="95" Width="436"/>
                         <ScrollViewer x:Name="ChatScrollViewer" HorizontalAlignment="Left" Height="309" Margin="10,284,0,0" VerticalAlignment="Top" Width="436">
