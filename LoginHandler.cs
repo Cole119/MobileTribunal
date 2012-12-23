@@ -35,32 +35,40 @@ namespace MobileTribunal
             HttpWebRequest request = (HttpWebRequest)asynchronousResult.AsyncState;
 
             // End the operation
-            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(asynchronousResult);
-            HttpStatusCode rcode = response.StatusCode;
-            Stream streamResponse = response.GetResponseStream();
-            StreamReader streamRead = new StreamReader(streamResponse);
-
-            string responseString = streamRead.ReadToEnd();
-
-            if ((int)rcode == 302)
+            try
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(asynchronousResult);
+                HttpStatusCode rcode = response.StatusCode;
+                Stream streamResponse = response.GetResponseStream();
+                StreamReader streamRead = new StreamReader(streamResponse);
+
+                string responseString = streamRead.ReadToEnd();
+
+                if ((int)rcode == 302)
                 {
-                    mobileTribunal.mainPage.loginSucceeded();
-                });
+                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        mobileTribunal.mainPage.loginSucceeded();
+                    });
+                }
+                else
+                {
+                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        mobileTribunal.mainPage.loginFailed();
+                    });
+                }
+            
+                // Close the stream object
+                streamResponse.Close();
+                streamRead.Close();
+                // Release the HttpWebResponse
+                response.Close();
             }
-            else
+            catch (WebException ex)
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    mobileTribunal.mainPage.loginFailed();
-                });
+                System.Diagnostics.Debug.WriteLine("WebException occurred while trying to log in: " + ex.Status);
             }
-            // Close the stream object
-            streamResponse.Close();
-            streamRead.Close();
-            // Release the HttpWebResponse
-            response.Close(); 
         }
     }
 }
