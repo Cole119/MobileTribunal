@@ -27,30 +27,33 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
+        <!--phone:Pivot x:Name="CurrentCasePivot" Title="Current Case" ItemsSource="{Binding CaseInfo}"-->
         <phone:Pivot x:Name="CurrentCasePivot" Title="Current Case">
-            <!--Pivot item one-->
-            <phone:PivotItem x:Name="CasePivotItem" Header="Game 1" FontSize="20" Margin="12,12,12,0">
-                <Grid HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
-                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Players" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,47,0,0">
-                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
-                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
-                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
-                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
-                        <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="/Assets/unknown_champ.png"/>
-                    </StackPanel>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
-                    <TextBlock x:Name="ReportCommentsBlock" Margin="0,180,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="95" Width="436"/>
-                    <ScrollViewer x:Name="ChatScrollViewer" HorizontalAlignment="Left" Height="309" Margin="10,284,0,0" VerticalAlignment="Top" Width="436">
-                        <TextBlock x:Name="ChatBlock" TextWrapping="Wrap" Text="TextBlock"/>
-                    </ScrollViewer>
-                </Grid>
-            </phone:PivotItem>
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding header}"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
 
-            <!--Pivot item two-->
-            <phone:PivotItem Header="Game 2">
-                <Grid/>
-            </phone:PivotItem>
+            <phone:Pivot.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Players" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,47,0,0">
+                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage1}"/>
+                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage2}"/>
+                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage3}"/>
+                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage4}"/>
+                            <Image HorizontalAlignment="Left" Height="{StaticResource ChampImageSize}" Margin="15" VerticalAlignment="Top" Width="{StaticResource ChampImageSize}" Source="{Binding champImage5}"/>
+                        </StackPanel>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
+                        <TextBlock x:Name="ReportCommentsBlock" Margin="0,180,0,0" TextWrapping="Wrap" Text="{Binding comments}" VerticalAlignment="Top" Height="95" Width="436"/>
+                        <ScrollViewer x:Name="ChatScrollViewer" HorizontalAlignment="Left" Height="309" Margin="10,284,0,0" VerticalAlignment="Top" Width="436">
+                            <TextBlock x:Name="ChatBlock" TextWrapping="Wrap" Text="{Binding chatlog}"/>
+                        </ScrollViewer>
+                    </Grid>
+                </DataTemplate>
+            </phone:Pivot.ItemTemplate>
         </phone:Pivot>
     </Grid>
 
