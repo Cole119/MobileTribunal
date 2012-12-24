@@ -66,7 +66,7 @@ namespace MobileTribunal
         {
             LoginProgressBar.Visibility = System.Windows.Visibility.Collapsed;
             LoginFailedText.Visibility = System.Windows.Visibility.Collapsed;
-            NavigationService.Navigate(new Uri("/CasePage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
         }
 
         public void loginFailed()

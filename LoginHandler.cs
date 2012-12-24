@@ -24,7 +24,7 @@ namespace MobileTribunal
         {
             username = Uri.EscapeUriString(username);
             password = Uri.EscapeUriString(password);
-            String url = "https://na.leagueoflegends.com/user/login";
+            String url = "https://"+MobileTribunal.Instance.region+".leagueoflegends.com/user/login";
             String content = "name=" + username + "&pass=" + password + "&form_id=user_login";
             mobileTribunal.poster.createRequest(url, content, false, new AsyncCallback(GetResponseCallback));
             return;

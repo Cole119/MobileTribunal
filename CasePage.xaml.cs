@@ -18,7 +18,7 @@ namespace MobileTribunal
         {
             InitializeComponent();
             //MainPivot.SelectedIndex = 1
-            ObservableCollection<CaseInfo> pivotData = new ObservableCollection<CaseInfo>();
+            /*ObservableCollection<CaseInfo> pivotData = new ObservableCollection<CaseInfo>();
             CaseInfo sampleCase = new CaseInfo();
             sampleCase.header = "Game 1";
             sampleCase.champImages = new ObservableCollection<Uri>();
@@ -42,19 +42,8 @@ namespace MobileTribunal
             sampleCase.comments = "Some example comments...";
             sampleCase.chatlog = "This is\nthe\nchatlog of the\nsecond game.";
             pivotData.Add(sampleCase);
-
-            /*sampleCase = new CaseInfo();
-            sampleCase.header = "Game 2";
-            sampleCase.champImage1 = new Uri("/Assets/unknown_champ.png", UriKind.Relative);
-            sampleCase.champImage2 = new Uri("/Assets/unknown_champ.png", UriKind.Relative);
-            sampleCase.champImage3 = new Uri("/Assets/unknown_champ.png", UriKind.Relative);
-            sampleCase.champImage4 = new Uri("/Assets/unknown_champ.png", UriKind.Relative);
-            sampleCase.champImage5 = new Uri("/Assets/unknown_champ.png", UriKind.Relative);
-            sampleCase.comments = "Some example comments...";
-            sampleCase.chatlog = "This is\nthe\nchatlog of the second game.";
-            pivotData.Add(sampleCase);*/
-            //CurrentCasePivot.DataContext = pivotData;
-            CurrentCasePivot.ItemsSource = pivotData;
+            CurrentCasePivot.ItemsSource = pivotData;*/
+            CurrentCasePivot.ItemsSource = MobileTribunal.Instance.currentCase;
         }
     }
 }

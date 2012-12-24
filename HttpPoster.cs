@@ -16,7 +16,7 @@ namespace MobileTribunal
 
         public HttpPoster()
         {
-            cookieContainer = new CookieContainer();
+            //cookieContainer = new CookieContainer();
         }
 
         public void setContent(String newContent)
@@ -27,7 +27,7 @@ namespace MobileTribunal
         public void createRequest(String url, String content, bool allowAutoRedirect, AsyncCallback responseCallback)
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.CookieContainer = cookieContainer;
+            request.CookieContainer = MobileTribunal.Instance.cookies;
             this.responseCallback = responseCallback;
             this.content = content;
             request.Method = "POST";
