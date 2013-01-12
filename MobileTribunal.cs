@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Net.Browser;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace MobileTribunal
         public ObservableCollection<CaseInfo> currentCase;
         public CookieContainer cookies;
         public String region;
+        public WebHeaderCollection headers;
 
         public MobileTribunal(MainPage page)
         {
@@ -26,6 +28,7 @@ namespace MobileTribunal
             getter = new HttpGetter();
             currentCase = new ObservableCollection<CaseInfo>();
             cookies = new CookieContainer();
+            headers = new WebHeaderCollection();
             region = "na";
         }
     }

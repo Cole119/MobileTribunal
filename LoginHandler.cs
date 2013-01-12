@@ -14,6 +14,8 @@ namespace MobileTribunal
     class LoginHandler
     {
         MobileTribunal mobileTribunal;
+        String username;
+        String password;
 
         public LoginHandler(MobileTribunal tribunal)
         {
@@ -22,11 +24,11 @@ namespace MobileTribunal
 
         public void login(String username, String password)
         {
-            username = Uri.EscapeUriString(username);
-            password = Uri.EscapeUriString(password);
+            this.username = Uri.EscapeUriString(username);
+            this.password = Uri.EscapeUriString(password);
             String url = "https://"+MobileTribunal.Instance.region+".leagueoflegends.com/user/login";
             String content = "name=" + username + "&pass=" + password + "&form_id=user_login";
-            mobileTribunal.poster.createRequest(url, content, false, new AsyncCallback(GetResponseCallback));
+            mobileTribunal.poster.createRequest(url, content, true, new AsyncCallback(GetResponseCallback));
             return;
         }
 
@@ -43,6 +45,17 @@ namespace MobileTribunal
                 StreamReader streamRead = new StreamReader(streamResponse);
 
                 string responseString = streamRead.ReadToEnd();
+
+                System.Diagnostics.Debug.WriteLine("Number of Cookies after: " + MobileTribunal.Instance.cookies.Count);
+                /*System.Diagnostics.Debug.WriteLine("Number of Cookies: " + response.Cookies.Count);
+                IEnumerator<Cookie> e = response.Cookies.Cast<Cookie>().GetEnumerator();
+                while (e.MoveNext())
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Current.Name);
+                }*/
+                System.Diagnostics.Debug.WriteLine("Index of Immobilon: " + responseString.IndexOf("Immobilon"));
+                System.Diagnostics.Debug.WriteLine("Index of immobilon: " + responseString.IndexOf("immobilon"));
+                System.Diagnostics.Debug.WriteLine(responseString);
 
                 if ((int)rcode == 302)
                 {
