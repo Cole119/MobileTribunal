@@ -101,6 +101,11 @@ namespace MobileTribunal
             }
         }
 
+        private void UseBrowserButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/BrowserLoginPage.xaml", UriKind.Relative));
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{

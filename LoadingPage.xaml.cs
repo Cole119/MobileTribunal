@@ -25,9 +25,13 @@ namespace MobileTribunal
 
         public void LoadInitialCase()
         {
-            progress = TRIBUNAL;
+            /*progress = TRIBUNAL;
             MobileTribunal.Instance.getter.createRequest(
                 "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/", 
+                new AsyncCallback(GetResponseCallback));*/
+            progress = GUIDELINES;
+            MobileTribunal.Instance.getter.createRequest(
+                "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/en/guidelines/",
                 new AsyncCallback(GetResponseCallback));
         }
 
@@ -73,7 +77,7 @@ namespace MobileTribunal
             String html = new StreamReader(response.GetResponseStream()).ReadToEnd();
             System.Diagnostics.Debug.WriteLine("Number of Cookies after: " + MobileTribunal.Instance.cookies.Count);
             //System.Diagnostics.Debug.WriteLine("Response: " + (int)response.StatusCode);
-            //System.Diagnostics.Debug.WriteLine("Length: "+html.Length+"\nTitle: "+html.Substring(html.IndexOf("<title>")));
+            System.Diagnostics.Debug.WriteLine("Length: "+html.Length+"\nTitle: "+html.Substring(html.IndexOf("<title>")));
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 NavigationService.Navigate(new Uri("/CasePage.xaml", UriKind.Relative));

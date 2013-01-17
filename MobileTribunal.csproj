@@ -93,6 +93,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrowserLoginPage.xaml.cs">
+      <DependentUpon>BrowserLoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CaseInfo.cs" />
     <Compile Include="CaseLoader.cs" />
     <Compile Include="HttpGetter.cs" />
@@ -121,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="BrowserLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -55,6 +55,7 @@
             <TextBlock x:Name="PasswordWatermark" HorizontalAlignment="Left" Margin="20,151,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" FontSize="24" Foreground="#FF767676" IsHitTestVisible="False"/>
             <ProgressBar x:Name="LoginProgressBar" HorizontalAlignment="Center" Height="10" Margin="0,46,0,0" VerticalAlignment="Top" Width="100" IsIndeterminate="True" Visibility="Collapsed"/>
             <CheckBox x:Name="RememberCheckBox" Content="Remember me" HorizontalAlignment="Left" Margin="231,215,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="UseBrowserButton" Content="Login with browser" HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top" Width="256" Height="93" Tap="UseBrowserButton_Tap"/>
 
         </Grid>
 

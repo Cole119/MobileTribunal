@@ -35,7 +35,7 @@ namespace MobileTribunal
         private void GetResponseCallback(IAsyncResult asynchronousResult)
         {
             HttpWebRequest request = (HttpWebRequest)asynchronousResult.AsyncState;
-
+            
             // End the operation
             try
             {
@@ -46,16 +46,22 @@ namespace MobileTribunal
 
                 string responseString = streamRead.ReadToEnd();
 
-                System.Diagnostics.Debug.WriteLine("Number of Cookies after: " + MobileTribunal.Instance.cookies.Count);
-                /*System.Diagnostics.Debug.WriteLine("Number of Cookies: " + response.Cookies.Count);
+                //System.Diagnostics.Debug.WriteLine("Number of Cookies after: " + MobileTribunal.Instance.cookies.Count);
+                System.Diagnostics.Debug.WriteLine("Number of Cookies: " + response.Cookies.Count);
                 IEnumerator<Cookie> e = response.Cookies.Cast<Cookie>().GetEnumerator();
                 while (e.MoveNext())
                 {
                     System.Diagnostics.Debug.WriteLine(e.Current.Name);
-                }*/
+                }
                 System.Diagnostics.Debug.WriteLine("Index of Immobilon: " + responseString.IndexOf("Immobilon"));
                 System.Diagnostics.Debug.WriteLine("Index of immobilon: " + responseString.IndexOf("immobilon"));
-                System.Diagnostics.Debug.WriteLine(responseString);
+                //System.Diagnostics.Debug.WriteLine(responseString);
+
+                // Close the stream object
+                streamResponse.Close();
+                streamRead.Close();
+                // Release the HttpWebResponse
+                response.Close();
 
                 if ((int)rcode == 302)
                 {
@@ -71,12 +77,6 @@ namespace MobileTribunal
                         mobileTribunal.mainPage.loginFailed();
                     });
                 }
-            
-                // Close the stream object
-                streamResponse.Close();
-                streamRead.Close();
-                // Release the HttpWebResponse
-                response.Close();
             }
             catch (WebException ex)
             {
