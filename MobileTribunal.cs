@@ -19,6 +19,7 @@ namespace MobileTribunal
         public CookieContainer cookies;
         public String region;
         public WebHeaderCollection headers;
+        public CaseLoader caseLoader;
 
         public MobileTribunal(MainPage page)
         {
@@ -30,6 +31,7 @@ namespace MobileTribunal
             cookies = new CookieContainer();
             headers = new WebHeaderCollection();
             region = "na";
+            caseLoader = new CaseLoader();
         }
     }
 }

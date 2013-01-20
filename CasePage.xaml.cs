@@ -44,6 +44,7 @@ namespace MobileTribunal
             pivotData.Add(sampleCase);
             CurrentCasePivot.ItemsSource = pivotData;*/
             CurrentCasePivot.ItemsSource = MobileTribunal.Instance.currentCase;
+
         }
     }
 }
