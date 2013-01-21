@@ -12,6 +12,10 @@ using System.Windows.Media.Imaging;
 
 namespace MobileTribunal
 {
+    /*
+     * This class simply sets the data source of the CasePage.xaml.
+     * The CasePage.xaml then renders the current case from that data.
+     */
     public partial class CasePage : PhoneApplicationPage
     {
         public CasePage()

@@ -8,18 +8,18 @@ using System.Windows.Media.Imaging;
 
 namespace MobileTribunal
 {
+    /*
+     * The CaseInfo class holds all of the necessary information
+     * about a game in a case that will be used to create and populate
+     * a CasePage.
+     */
     public class CaseInfo
     {
-        public String header { get; set; }
-        /*public Uri champImage1 { get; set; }
-        public Uri champImage2 { get; set; }
-        public Uri champImage3 { get; set; }
-        public Uri champImage4 { get; set; }
-        public Uri champImage5 { get; set; }*/
-        public ObservableCollection<Uri> champImages { get; set; }
-        public String comments { get; set; }
+        public String header { get; set; } //name of the pivot item (Generally something like "Game 1")
+        public ObservableCollection<Uri> champImages { get; set; } //The URIs of the images for rendered champion icons
+        public String comments { get; set; } //reporter comments
         //public String chatlog { get; set; }
-        public ObservableCollection<ChatlogMessage> chatlog { get; set; }
+        public ObservableCollection<ChatlogMessage> chatlog { get; set; } 
 
         public CaseInfo()
         {
@@ -28,6 +28,10 @@ namespace MobileTribunal
         }
     }
 
+    /*
+     * The ChatlogMessage class holds information that dictates
+     * how a specific message on the chatlog is displayed.
+     */
     public class ChatlogMessage
     {
         public String player { get; set; }

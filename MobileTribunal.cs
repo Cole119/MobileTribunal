@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace MobileTribunal
 {
+    /*
+     * This class is used to hold a reference to shared 
+     * objects that any class can access. The initial
+     * MobileTribunal object is created at application
+     * runtime and the static Instance object is set to it.
+     */
     class MobileTribunal
     {
-        public static MobileTribunal Instance;
+        public static MobileTribunal Instance; //This static object allows all classes to reference the other objects in this class
         public MainPage mainPage;
         public HttpPoster poster;
         public HttpGetter getter;

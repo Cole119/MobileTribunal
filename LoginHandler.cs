@@ -11,6 +11,11 @@ using System.Windows.Navigation;
 
 namespace MobileTribunal
 {
+    /*
+     * This class is used to log the user into the League of Legends website
+     * It is currently broken. There seems to be a problem with the way 
+     * the WebRequest class handles cookie domains.
+     */
     class LoginHandler
     {
         MobileTribunal mobileTribunal;

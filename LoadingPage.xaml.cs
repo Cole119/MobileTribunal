@@ -12,6 +12,10 @@ using System.IO;
 
 namespace MobileTribunal
 {
+    /*
+     * The LoadingPage is displayed while case data is being downloaded
+     * from the server and parsed.
+     */
     public partial class LoadingPage : PhoneApplicationPage
     {
         int progress;
@@ -25,51 +29,55 @@ namespace MobileTribunal
 
         public void LoadInitialCase()
         {
-            /*progress = TRIBUNAL;
-            MobileTribunal.Instance.getter.createRequest(
-                "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/", 
-                new AsyncCallback(GetResponseCallback));*/
             progress = GUIDELINES;
             MobileTribunal.Instance.getter.createRequest(
                 "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/en/guidelines/",
                 new AsyncCallback(GetResponseCallback), false);
         }
 
+        /*
+         * Gets a response back and checks if the tribunal is available.
+         * If it is, then it requests the /tribunal/accept page.
+         */
         private void GetResponseCallback(IAsyncResult asynchronousResult)
         {
             HttpWebRequest request = (HttpWebRequest)asynchronousResult.AsyncState;
             HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(asynchronousResult);
+            String html = new StreamReader(response.GetResponseStream()).ReadToEnd();
             //System.Diagnostics.Debug.WriteLine("Number of Cookies after: " + MobileTribunal.Instance.cookies.Count);
             if ((int)response.StatusCode != 200)
             {
-                MessageBox.Show("An error occurred while trying to load a case.");
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show("An error occurred while trying to load a case.");
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                });
+                return;
+            }
+            else if (html.Contains("Tribunal in Recess"))
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show("The Tribunal is currently in recess. Try again later.");
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                });
                 return;
             }
             else
             {
-                switch (progress)
-                {
-                    case TRIBUNAL:
-                        String html = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                        //System.Diagnostics.Debug.WriteLine("Index of Immobilon: "+html.IndexOf("Immobilon"));
-                        progress = GUIDELINES;
-                        MobileTribunal.Instance.getter.createRequest(
-                            "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/en/guidelines/",
-                            new AsyncCallback(GetResponseCallback));
-                        break;
-                    case GUIDELINES:
-                        progress = ACCEPT;
-                        MobileTribunal.Instance.getter.createRequest(
-                            "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/accept/",
-                            new AsyncCallback(GetAcceptCallback), true);
-                        break;
-                }
-                
+                progress = ACCEPT;
+                MobileTribunal.Instance.getter.createRequest(
+                    "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/accept/",
+                    new AsyncCallback(GetAcceptCallback), true);
             }
             
         }
 
+        /*
+         * Gets a response from the /tribunal/accept request. This response will contain
+         * the case id and the number of game in the case. 
+         * These two pieces of info are used by the CaseLoader class to request the JSON data.
+         */
         private void GetAcceptCallback(IAsyncResult asynchronousResult)
         {
             HttpWebRequest request = (HttpWebRequest)asynchronousResult.AsyncState;
@@ -78,14 +86,19 @@ namespace MobileTribunal
             //System.Diagnostics.Debug.WriteLine("Number of Cookies after: " + MobileTribunal.Instance.cookies.Count);
             //System.Diagnostics.Debug.WriteLine("Response: " + (int)response.StatusCode);
             //System.Diagnostics.Debug.WriteLine("Length: " + html.Length + "\nTitle: " + html.Substring(html.IndexOf("<title>")));
-            /*the case id will be found in the title of the page
-            it will look something like: <title>The Tribunal -  Reviewing Case CASEID</title>*/
+
+            /* The case id will be found in the title of the page
+             * it will look something like: <title>The Tribunal -  Reviewing Case CASEID</title>
+             */
             String caseId;
             int numGames;
             int startIndex = html.IndexOf("Reviewing Case ") + "Reviewing Case ".Length;
             caseId = html.Substring(startIndex, html.IndexOf("</title>") - startIndex);
             System.Diagnostics.Debug.WriteLine("Case Id: " + caseId);
 
+            /* The number of games is stored in a JSON structure.
+             * it looks something like 'game_count': NUMGAMES,
+             */
             startIndex = html.IndexOf("'game_count': ") + "'game_count': ".Length;
             bool gotNumGames = int.TryParse(html.Substring(startIndex, html.IndexOf(",", startIndex) - startIndex), out numGames);
             System.Diagnostics.Debug.WriteLine("Number of games: " + numGames);
@@ -94,16 +107,22 @@ namespace MobileTribunal
             {
 
                 MobileTribunal.Instance.caseLoader.loadNewCase(caseId, numGames, new AsyncCallback(CaseLoadedCallback));
-                
             }
             else
             {
-                MessageBox.Show("An error occurred while trying to load a case.");
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show("An error occurred while trying to load a case.");
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                });
                 return;
             }
         }
 
+        /*
+         * This is given to the CaseLoader object and will be called
+         * after the CasePage is ready to display
+         */
         private void CaseLoadedCallback(IAsyncResult result)
         {
             NavigationService.Navigate(new Uri("/CasePage.xaml", UriKind.Relative));

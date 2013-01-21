@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MobileTribunal
 {
+    /*
+     * HttpGetter performs a GET request for a given url
+     */
     class HttpGetter
     {
         public void createRequest(String url, AsyncCallback callback, bool allowAutoRedirect=true)

@@ -11,12 +11,17 @@ using System.Windows.Navigation;
 
 namespace MobileTribunal
 {
+    /*
+     * The CaseLoader class is used to get case information
+     * from the server, parse it, and prepare a new CaseInfo
+     * object to hold that information
+     */
     class CaseLoader
     {
         String caseId;
         int currentGame = 1;
         int numGames = 0;
-        AsyncCallback callback;
+        AsyncCallback callback; //used to notify the calling object that we are done.
 
         public bool loadNewCase(String caseId, int numGames, AsyncCallback callback)
         {
@@ -38,6 +43,10 @@ namespace MobileTribunal
             return true;
         }
 
+        /*
+         * Receives the response from the server in JSON format, parses it,
+         * and stores the parsed data in a new CaseInfo object.
+         */
         private void GetResponseCallback(IAsyncResult asynchronousResult)
         {
             HttpWebRequest request = (HttpWebRequest)asynchronousResult.AsyncState;
@@ -50,10 +59,9 @@ namespace MobileTribunal
                 Stream streamResponse = response.GetResponseStream();
                 StreamReader streamRead = new StreamReader(streamResponse);
 
-                string responseString = streamRead.ReadToEnd();
+                string responseString = streamRead.ReadToEnd(); //String will be in JSON format
                 JObject json = JObject.Parse(responseString);
                 JArray players = (JArray)json["players"];
-                //System.Diagnostics.Debug.WriteLine("Game " + currentGame + ": " + responseString.Substring(0, 100) + "\n");
                 CaseInfo newCase = new CaseInfo();
                 newCase.header = "Game " + currentGame;
                 for (int i = 0; i < players.Count; i++)
@@ -74,6 +82,7 @@ namespace MobileTribunal
                 System.Diagnostics.Debug.WriteLine("WebException occurred while trying to log in: " + ex.Status);
             }
 
+            //Gets the next game in the case incrementally. In the future this will be done in parallel with the first request.
             if(currentGame < numGames){
                 currentGame++;
                 MobileTribunal.Instance.getter.createRequest("http://" + MobileTribunal.Instance.region +
@@ -88,6 +97,9 @@ namespace MobileTribunal
             }
         }
 
+        /*
+         * Parses the JSON chat data into multiple ChatlogMessages.
+         */
         public void parseChatlog(JArray chatlog, CaseInfo caseInfo)
         {
             for (int i = 0; i < chatlog.Count; i++)

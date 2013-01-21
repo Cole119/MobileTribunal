@@ -12,6 +12,10 @@ using System.IO;
 
 namespace MobileTribunal
 {
+    /*
+     * The BrowserLoginPage is used to allow the user to log into
+     * their leagueoflegends.com account via the WebBrowser control
+     */
     public partial class BrowserLoginPage : PhoneApplicationPage
     {
         public BrowserLoginPage()
@@ -23,6 +27,14 @@ namespace MobileTribunal
             }
         }
 
+        /*
+         * Called when the user clicks the "Done" button on the 
+         * BrowserLoginPage. 
+         * This method gets the cookies from the WebBrowser control,
+         * copies them into the shared CookieContainer, and then
+         * switches to the LoadingPage if the user had successfully logged
+         * in from the browser.
+         */
         private void BrowserDoneButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             bool loggedIn = false;

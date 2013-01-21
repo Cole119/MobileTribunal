@@ -12,6 +12,13 @@ using System.IO.IsolatedStorage;
 
 namespace MobileTribunal
 {
+    /*
+     * The MainPage is initially presented to the user when the 
+     * application starts up. It calls the LoginHandler when the 
+     * user clicks the login button. 
+     * This page is currently unused in favor of the BrowserLoginPage
+     * due to an issue with the LoginHandler.
+     */
     public partial class MainPage : PhoneApplicationPage
     {
         private MobileTribunal mobileTribunal;

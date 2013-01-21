@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace MobileTribunal
 {
+    /*
+     * HttpPoster is used to POST data to a uri
+     */
     class HttpPoster
     {
         private String content;
@@ -24,6 +27,9 @@ namespace MobileTribunal
             this.content = newContent;
         }
 
+        /*
+         * POSTs content to the given url
+         */ 
         public void createRequest(String url, String content, bool allowAutoRedirect, AsyncCallback responseCallback)
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -40,6 +46,10 @@ namespace MobileTribunal
             request.BeginGetRequestStream(new AsyncCallback(GetRequestStreamCallback), request);
         }
 
+        /*
+         * Gets a stream from the response and writes the previously supplied 
+         * content to it
+         */
         private void GetRequestStreamCallback(IAsyncResult asynchronousResult)
         {
             try
@@ -54,10 +64,6 @@ namespace MobileTribunal
 
                 // Write to the request stream.
                 postStream.Write(postBytes, 0, postBytes.Length);
-                /*StreamWriter writer = new StreamWriter(postStream);
-                writer.Write(content);
-                writer.Flush();
-                writer.Close();*/
                 postStream.Close();
 
                 // Start the asynchronous operation to get the response
