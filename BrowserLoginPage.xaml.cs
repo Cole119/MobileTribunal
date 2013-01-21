@@ -17,13 +17,17 @@ namespace MobileTribunal
         public BrowserLoginPage()
         {
             InitializeComponent();
+            if (MobileTribunal.Instance == null)
+            {
+                MobileTribunal.Instance = new MobileTribunal(null);
+            }
         }
 
         private void BrowserDoneButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             bool loggedIn = false;
             CookieCollection cookies = WebBrowserControl.GetCookies();
-            System.Diagnostics.Debug.WriteLine("Num cookies: " + cookies.Count);
+            //System.Diagnostics.Debug.WriteLine("Num cookies: " + cookies.Count);
             IEnumerator enumerator = cookies.GetEnumerator();
             while (enumerator.MoveNext())
             {
@@ -42,11 +46,13 @@ namespace MobileTribunal
 
             if (loggedIn)
             {
-                MobileTribunal.Instance.mainPage.loginSucceeded();
+                //MobileTribunal.Instance.mainPage.loginSucceeded();
+                NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
             }
             else
             {
-                MobileTribunal.Instance.mainPage.loginFailed();
+                //MobileTribunal.Instance.mainPage.loginFailed();
+                MessageBox.Show("You don't appear to be logged in. Try again.");
             }
         }
 

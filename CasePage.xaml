@@ -53,9 +53,20 @@
                         </ListBox>
                         <TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
                         <TextBlock x:Name="ReportCommentsBlock" Margin="0,165,0,0" TextWrapping="Wrap" Text="{Binding comments}" VerticalAlignment="Top" Height="95" Width="436"/>
-                        <ScrollViewer x:Name="ChatScrollViewer" HorizontalAlignment="Stretch" Height="Auto" Margin="10,260,0,0" VerticalAlignment="Stretch" Width="Auto">
-                            <TextBlock x:Name="ChatBlock" TextWrapping="Wrap" Text="{Binding chatlog}"/>
-                        </ScrollViewer>
+                        <ListBox ItemsSource="{Binding chatlog}" Margin="10,260,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock x:Name="ChatBlock" TextWrapping="Wrap">
+                                        <Run Text="{Binding player}" Foreground="{Binding color}" FontSize="24" FontWeight="Bold"/><Run Text="{Binding text}" Foreground="{Binding color}" FontSize="24"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>

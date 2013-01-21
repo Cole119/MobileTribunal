@@ -38,6 +38,7 @@ namespace MobileTribunal
             {
                 RememberCheckBox.IsChecked = true;
             }
+
         }
 
         private void LoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
