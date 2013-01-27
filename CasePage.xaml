@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="MobileTribunal.CasePage"
     mc:Ignorable="d"
     SupportedOrientations="Portrait"  Orientation="Portrait"
@@ -38,6 +39,11 @@
             <phone:Pivot.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Players" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
                         <ListBox ItemsSource="{Binding champImages}" Margin="0,40,0,0" IsHitTestVisible="False">
                             <ListBox.ItemsPanel>
@@ -51,22 +57,30 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/>
-                        <TextBlock x:Name="ReportCommentsBlock" Margin="0,165,0,0" TextWrapping="Wrap" Text="{Binding comments}" VerticalAlignment="Top" Height="95" Width="436"/>
-                        <ListBox ItemsSource="{Binding chatlog}" Margin="10,260,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock x:Name="ChatBlock" TextWrapping="Wrap">
-                                        <Run Text="{Binding player}" Foreground="{Binding color}" FontSize="24" FontWeight="Bold"/><Run Text="{Binding text}" Foreground="{Binding color}" FontSize="24"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                        <toolkit:ExpanderView Header="Reporter Comments" x:Name="commentsExpander" FontSize="24" VerticalAlignment="Top" Grid.Row="1">
+                            <toolkit:ExpanderView.Items>
+                                <!--TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/-->
+                                <TextBlock x:Name="ReportCommentsBlock" Margin="0,165,0,0" TextWrapping="Wrap" Text="{Binding comments}" VerticalAlignment="Top" Height="95" Width="436"/>
+                            </toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView>
+                        <!--toolkit:ExpanderView Header="Chatlog" x:Name="chatlogExpander" FontSize="24" VerticalAlignment="Top" Grid.Row="2">
+                            <toolkit:ExpanderView.Items-->
+                                <ListBox ItemsSource="{Binding chatlog}" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock x:Name="ChatBlock" TextWrapping="Wrap">
+                                    <Run Text="{Binding player}" Foreground="{Binding color}" FontSize="24" FontWeight="Bold"/><Run Text="{Binding text}" Foreground="{Binding color}" FontSize="24"/>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            <!--/toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView-->
                     </Grid>
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>
