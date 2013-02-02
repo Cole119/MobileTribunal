@@ -38,7 +38,8 @@
 
             <phone:Pivot.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Left" Height="603" VerticalAlignment="Top" Width="456">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -57,34 +58,43 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <toolkit:ExpanderView Header="Reporter Comments" x:Name="commentsExpander" FontSize="24" VerticalAlignment="Top" Grid.Row="1">
+                        <toolkit:ExpanderView Header="Reporter Comments" x:Name="commentsExpander" FontSize="36" VerticalAlignment="Top" Grid.Row="1">
                             <toolkit:ExpanderView.Items>
                                 <!--TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Report Comments" VerticalAlignment="Top" FontSize="24" TextDecorations="Underline"/-->
                                 <TextBlock x:Name="ReportCommentsBlock" Margin="0,165,0,0" TextWrapping="Wrap" Text="{Binding comments}" VerticalAlignment="Top" Height="95" Width="436"/>
                             </toolkit:ExpanderView.Items>
                         </toolkit:ExpanderView>
-                        <!--toolkit:ExpanderView Header="Chatlog" x:Name="chatlogExpander" FontSize="24" VerticalAlignment="Top" Grid.Row="2">
-                            <toolkit:ExpanderView.Items-->
-                                <ListBox ItemsSource="{Binding chatlog}" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="2">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock x:Name="ChatBlock" TextWrapping="Wrap">
-                                    <Run Text="{Binding player}" Foreground="{Binding color}" FontSize="24" FontWeight="Bold"/><Run Text="{Binding text}" Foreground="{Binding color}" FontSize="24"/>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            <!--/toolkit:ExpanderView.Items>
-                        </toolkit:ExpanderView-->
+                        <toolkit:ExpanderView Header="Chatlog" x:Name="chatlogExpander" ItemsSource="{Binding chatlog}" FontSize="36" VerticalAlignment="Stretch" Grid.Row="2" IsExpanded="True">
+                            <toolkit:ExpanderView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </toolkit:ExpanderView.ItemsPanel>
+                            <toolkit:ExpanderView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock x:Name="ChatBlock" TextWrapping="Wrap">
+                                        <Run Text="{Binding player}" Foreground="{Binding color}" FontSize="24" FontWeight="Bold"/><Run Text="{Binding text}" Foreground="{Binding color}" FontSize="24"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </toolkit:ExpanderView.ItemTemplate>
+                        </toolkit:ExpanderView>
                     </Grid>
+                    </ScrollViewer>
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>
         </phone:Pivot>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/check.png" Text="Pardon" Click="ApplicationBarIconButton_Click_1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/stop.png" Text="Punish"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/next.png" Text="Skip"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

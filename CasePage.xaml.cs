@@ -50,5 +50,12 @@ namespace MobileTribunal
             CurrentCasePivot.ItemsSource = MobileTribunal.Instance.currentCase;
 
         }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            ExpanderView ex = (ExpanderView)GetTemplateChild("chatlogExpander");
+            if (ex != null) System.Diagnostics.Debug.WriteLine("TextBlock height: " + ex.Height);
+            else System.Diagnostics.Debug.WriteLine("Couldn't find control.");
+        }
     }
 }
