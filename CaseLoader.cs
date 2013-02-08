@@ -34,9 +34,9 @@ namespace MobileTribunal
             this.numGames = numGames;
             this.callback = callback;
 
-            MobileTribunal.Instance.currentCase.Clear();
+            MobileTribunal.GetInstance().currentCase.Clear();
 
-            MobileTribunal.Instance.getter.createRequest("http://" + MobileTribunal.Instance.region +
+            MobileTribunal.GetInstance().getter.createRequest("http://" + MobileTribunal.GetInstance().region +
                                                          ".leagueoflegends.com/tribunal/en/get_game/" + caseId + "/" +currentGame+"/", 
                                                          new AsyncCallback(GetResponseCallback));
             
@@ -70,12 +70,12 @@ namespace MobileTribunal
                     string association = (String)player["association_to_offender"];
                     if (association.Equals("ally") || association.Equals("offender"))
                     {
-                        newCase.champImages.Add(new Uri("http://" + MobileTribunal.Instance.region + ".leagueoflegends.com" + (string)player["champion_url"]));
+                        newCase.champImages.Add(new Uri("http://" + MobileTribunal.GetInstance().region + ".leagueoflegends.com" + (string)player["champion_url"]));
                     }
                 }
                 parseChatlog((JArray)json["chat_log"], newCase);
 
-                MobileTribunal.Instance.currentCase.Add(newCase);
+                MobileTribunal.GetInstance().currentCase.Add(newCase);
             }
             catch (WebException ex)
             {
@@ -85,7 +85,7 @@ namespace MobileTribunal
             //Gets the next game in the case incrementally. In the future this will be done in parallel with the first request.
             if(currentGame < numGames){
                 currentGame++;
-                MobileTribunal.Instance.getter.createRequest("http://" + MobileTribunal.Instance.region +
+                MobileTribunal.GetInstance().getter.createRequest("http://" + MobileTribunal.GetInstance().region +
                                                          ".leagueoflegends.com/tribunal/en/get_game/" + caseId + "/" + currentGame + "/",
                                                          new AsyncCallback(GetResponseCallback));
             }

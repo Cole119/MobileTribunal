@@ -22,6 +22,7 @@ namespace MobileTribunal
     public partial class MainPage : PhoneApplicationPage
     {
         private MobileTribunal mobileTribunal;
+        private static MainPage instance;
         private LoginHandler loginHandler;
         private IsolatedStorageSettings appSettings;
 
@@ -33,7 +34,7 @@ namespace MobileTribunal
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
 
-            mobileTribunal = new MobileTribunal(this);
+            mobileTribunal = MobileTribunal.GetInstance();
             loginHandler = new LoginHandler(mobileTribunal);
             appSettings = IsolatedStorageSettings.ApplicationSettings;
             if (appSettings.Contains("Username"))
@@ -46,6 +47,11 @@ namespace MobileTribunal
                 RememberCheckBox.IsChecked = true;
             }
 
+            instance = this;
+        }
+
+        public static MainPage GetCurrentInstance(){
+            return instance;
         }
 
         private void LoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)

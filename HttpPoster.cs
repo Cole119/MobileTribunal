@@ -34,7 +34,7 @@ namespace MobileTribunal
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             //System.Diagnostics.Debug.WriteLine("POST - Number of Cookies before: " + MobileTribunal.Instance.cookies.Count);
-            request.CookieContainer = MobileTribunal.Instance.cookies;
+            request.CookieContainer = MobileTribunal.GetInstance().cookies;
             //request.Headers = MobileTribunal.Instance.headers;
             request.Headers["Referer"] = "http://na.leagueoflegends.com/";
             this.responseCallback = responseCallback;

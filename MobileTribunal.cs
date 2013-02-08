@@ -17,8 +17,8 @@ namespace MobileTribunal
      */
     class MobileTribunal
     {
-        public static MobileTribunal Instance; //This static object allows all classes to reference the other objects in this class
-        public MainPage mainPage;
+        private static MobileTribunal Instance; //This static object allows all classes to reference the other objects in this class
+        //public MainPage mainPage;
         public HttpPoster poster;
         public HttpGetter getter;
         public ObservableCollection<CaseInfo> currentCase;
@@ -27,10 +27,10 @@ namespace MobileTribunal
         public WebHeaderCollection headers;
         public CaseLoader caseLoader;
 
-        public MobileTribunal(MainPage page)
+        private MobileTribunal()
         {
             Instance = this;
-            this.mainPage = page;
+            //this.mainPage = page;
             poster = new HttpPoster();
             getter = new HttpGetter();
             currentCase = new ObservableCollection<CaseInfo>();
@@ -38,6 +38,15 @@ namespace MobileTribunal
             headers = new WebHeaderCollection();
             region = "na";
             caseLoader = new CaseLoader();
+        }
+
+        public static MobileTribunal GetInstance(){
+            if (Instance == null)
+            {
+                Instance = new MobileTribunal();
+            }
+
+            return Instance;
         }
     }
 }

@@ -30,8 +30,8 @@ namespace MobileTribunal
         public void LoadInitialCase()
         {
             progress = GUIDELINES;
-            MobileTribunal.Instance.getter.createRequest(
-                "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/en/guidelines/",
+            MobileTribunal.GetInstance().getter.createRequest(
+                "http://" + MobileTribunal.GetInstance().region + ".leagueoflegends.com/tribunal/en/guidelines/",
                 new AsyncCallback(GetResponseCallback), false);
         }
 
@@ -66,8 +66,8 @@ namespace MobileTribunal
             else
             {
                 progress = ACCEPT;
-                MobileTribunal.Instance.getter.createRequest(
-                    "http://" + MobileTribunal.Instance.region + ".leagueoflegends.com/tribunal/accept/",
+                MobileTribunal.GetInstance().getter.createRequest(
+                    "http://" + MobileTribunal.GetInstance().region + ".leagueoflegends.com/tribunal/accept/",
                     new AsyncCallback(GetAcceptCallback), true);
             }
             
@@ -106,7 +106,7 @@ namespace MobileTribunal
             if (gotNumGames && !(String.IsNullOrEmpty(caseId) || numGames < 1))
             {
 
-                MobileTribunal.Instance.caseLoader.loadNewCase(caseId, numGames, new AsyncCallback(CaseLoadedCallback));
+                MobileTribunal.GetInstance().caseLoader.loadNewCase(caseId, numGames, new AsyncCallback(CaseLoadedCallback));
             }
             else
             {

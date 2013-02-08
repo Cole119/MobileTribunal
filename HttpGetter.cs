@@ -16,7 +16,7 @@ namespace MobileTribunal
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.AllowAutoRedirect = allowAutoRedirect;
-            request.CookieContainer = MobileTribunal.Instance.cookies;
+            request.CookieContainer = MobileTribunal.GetInstance().cookies;
             //request.Headers = MobileTribunal.Instance.headers;
             request.BeginGetResponse(new AsyncCallback(callback), request);
         }

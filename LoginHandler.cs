@@ -31,7 +31,7 @@ namespace MobileTribunal
         {
             this.username = Uri.EscapeUriString(username);
             this.password = Uri.EscapeUriString(password);
-            String url = "https://"+MobileTribunal.Instance.region+".leagueoflegends.com/user/login";
+            String url = "https://" + MobileTribunal.GetInstance().region + ".leagueoflegends.com/user/login";
             String content = "name=" + username + "&pass=" + password + "&form_id=user_login";
             mobileTribunal.poster.createRequest(url, content, true, new AsyncCallback(GetResponseCallback));
             return;
@@ -72,14 +72,14 @@ namespace MobileTribunal
                 {
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
-                        mobileTribunal.mainPage.loginSucceeded();
+                        MainPage.GetCurrentInstance().loginSucceeded();
                     });
                 }
                 else
                 {
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
-                        mobileTribunal.mainPage.loginFailed();
+                        MainPage.GetCurrentInstance().loginFailed();
                     });
                 }
             }

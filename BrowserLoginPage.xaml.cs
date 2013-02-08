@@ -21,10 +21,10 @@ namespace MobileTribunal
         public BrowserLoginPage()
         {
             InitializeComponent();
-            if (MobileTribunal.Instance == null)
+            /*if (MobileTribunal.Instance == null)
             {
                 MobileTribunal.Instance = new MobileTribunal(null);
-            }
+            }*/
         }
 
         /*
@@ -47,7 +47,7 @@ namespace MobileTribunal
                 Cookie cookie = new Cookie();
                 cookie.Name = ((Cookie)enumerator.Current).Name;
                 cookie.Value = ((Cookie)enumerator.Current).Value;
-                MobileTribunal.Instance.cookies.Add(new Uri("http://"+MobileTribunal.Instance.region+".leagueoflegends.com"), cookie);
+                MobileTribunal.GetInstance().cookies.Add(new Uri("http://"+MobileTribunal.GetInstance().region+".leagueoflegends.com"), cookie);
                 if (cookie.Name.Equals("bbuserid", StringComparison.OrdinalIgnoreCase))
                 {
                     loggedIn = true;
@@ -71,7 +71,7 @@ namespace MobileTribunal
         private void testCookies()
         {
             HttpWebRequest request = HttpWebRequest.CreateHttp("http://na.leagueoflegends.com");
-            request.CookieContainer = MobileTribunal.Instance.cookies;
+            request.CookieContainer = MobileTribunal.GetInstance().cookies;
             request.BeginGetResponse(new AsyncCallback(GetResponse), request);
         }
 

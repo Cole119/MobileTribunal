@@ -47,7 +47,7 @@ namespace MobileTribunal
             sampleCase.chatlog = "This is\nthe\nchatlog of the\nsecond game.";
             pivotData.Add(sampleCase);
             CurrentCasePivot.ItemsSource = pivotData;*/
-            CurrentCasePivot.ItemsSource = MobileTribunal.Instance.currentCase;
+            CurrentCasePivot.ItemsSource = MobileTribunal.GetInstance().currentCase;
 
         }
 
